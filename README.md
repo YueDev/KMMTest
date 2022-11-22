@@ -2,13 +2,13 @@
 
 Android and ios app that use kotlin multiplatform mobile.
 
-##shared module
+## shared module
 1. collage
 2. http client
 
-##android app
+## android app
 1. collage
 2. image list
 
-##ios app
+## ios app
 todo
