@@ -1,10 +1,14 @@
 # KMMTest
 
-A collage app that use kotlin multiplatform mobile.
+Android and ios app that use kotlin multiplatform mobile.
 
-Completed:
-1. shared module
-2. Android App
+##shared module
+1. collage
+2. http client
 
-Todo:
-1. iOS App.
+##android app
+1. collage
+2. image list
+
+##ios app
+todo
