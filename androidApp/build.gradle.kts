@@ -14,8 +14,6 @@ android {
         versionName = "1.0"
     }
 
-    
-
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.2"
     }
@@ -42,8 +40,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
 
     implementation("io.coil-kt:coil:2.2.2")
+    implementation("com.github.chrisbanes:PhotoView:2.3.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
 }

@@ -2,40 +2,84 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-    
-    let collage = TCCollage()
-    
-    @State var collageString = ""
-    
+
+    @State private var imageClient = ImageClient.Loading
+
     var body: some View {
-        VStack {
-            Text(collageString)
-            Button("collage"){
-                var s = ""
-                var bitmaps: [TCBitmap] = []
-                
-                for _ in (0...10) {
-                    let w = Int.random(in: (500...2000))
-                    let h = Int.random(in: (500...2000))
-                    let uuid = UUID().uuidString
-                    bitmaps.append(TCBitmap(uuid: uuid, width: Int32(w), height: Int32(h)))
-                }
-                collage.doInit(bitmaps: bitmaps)
-                guard let result = collage.collage(width: 1000.0, height: 1000.0, padding: 0.0) else {
-                    return
-                }
-                bitmaps.forEach {
-                    guard let rect = result.get(uuid: $0.uuid) else {
-                        return
-                    }
-                    s.append("\(rect)\n")
-                }
-                collageString = s
+        ZStack {
+            switch imageClient {
+            case .Loading:
+                getButtonView()
+                getLoadingView()
+            case .Success(let urls):
+                getImageListView(urls)
+                getButtonView()
+            case .Error(let error):
+                getErrorView(error)
+                getButtonView()
             }
-        }.animation(.easeInOut, value: collageString)
+        }
+            .onAppear {
+                requestImages()
+            }
     }
+
 }
 
+
+extension ContentView {
+
+    private func getErrorView(_ error: String) -> some View {
+        Text(error)
+    }
+
+    private func getImageListView(_ urls: [String]) -> some View {
+        Text(urls.description)
+    }
+
+    private func getButtonView() -> some View {
+        VStack {
+            Spacer()
+            Button {
+                requestImages()
+            } label: {
+                Text("Refresh")
+            }
+                .buttonStyle(.borderedProminent)
+        }
+    }
+
+    private func getLoadingView() -> some View {
+        ZStack {
+            Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+            ProgressView()
+        }
+            .background(Color(red: 0.0, green: 0.0, blue: 0.0, opacity: 0.5))
+    }
+
+}
+
+
+extension ContentView {
+
+    private func requestImages() {
+        imageClient = ImageClient.Loading
+        Task {
+            do {
+                let urls = try await getImagesFromRepository()
+                imageClient = ImageClient.Success(imageUrls: urls)
+            } catch {
+                imageClient = ImageClient.Error(error: error.localizedDescription)
+            }
+        }
+    }
+
+    @MainActor
+    private func getImagesFromRepository() async throws -> [String] {
+        try await ImageClient.repository.getImageUrls()
+    }
+
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

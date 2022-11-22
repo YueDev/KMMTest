@@ -1,22 +1,18 @@
 package com.example.kmmtest.android
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.kmmtest.android.x_collage.XBitmap
 import com.example.kmmtest.android.x_collage.XBitmapSimple
 import com.example.kmmtest.android.x_collage.XCollageView
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
-class MainActivity : AppCompatActivity() {
+class CollageActivity : AppCompatActivity() {
 
     private val collageView: XCollageView by lazy { findViewById(R.id.collageView) }
     private val button1: View by lazy { findViewById(R.id.button1) }
@@ -26,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     private var ratio = ratioList[0]
     private var border = borderList[0]
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_collage)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         applyInsets(R.id.layout_root)
 
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         lifecycleScope.launch {
             val xBitmaps = imageResList.map {
-                val bitmap = getBitmapWithRes(this@MainActivity, it)
+                val bitmap = getBitmapWithRes(this@CollageActivity, it)
                 XBitmapSimple(null, bitmap)
             }
             collageView.setData(xBitmaps, border, border, ratio)

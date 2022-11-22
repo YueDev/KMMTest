@@ -15,4 +15,9 @@
 
     </style>
 
+    <style name="RoundedStyle8dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>
