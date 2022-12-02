@@ -6,12 +6,10 @@
 import Foundation
 import shared
 
-enum ImageClient {
+enum ImageClient: Equatable {
 
     static let repository = ImageRepository()
     case Loading
     case Success(imageUrls: [String])
     case Error(error: String)
-
-
 }

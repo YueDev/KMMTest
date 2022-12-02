@@ -11,4 +11,4 @@ Android and ios app that use kotlin multiplatform mobile.
 2. image list
 
 ## ios app
-todo
+1. simple collage

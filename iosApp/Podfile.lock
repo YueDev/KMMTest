@@ -1,16 +1,23 @@
 PODS:
+  - Kingfisher (7.4.1)
   - shared (1.0)
 
 DEPENDENCIES:
+  - Kingfisher (~> 7.0)
   - shared (from `../shared`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Kingfisher
 
 EXTERNAL SOURCES:
   shared:
     :path: "../shared"
 
 SPEC CHECKSUMS:
+  Kingfisher: cd762a593a61b2fbecf7645c00f9a801a3ebfc9c
   shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
 
-PODFILE CHECKSUM: f282da88f39e69507b0a255187c8a6b644477756
+PODFILE CHECKSUM: e1a6edaf71e360a0c8adbabca61d28587cff8849
 
 COCOAPODS: 1.11.3
